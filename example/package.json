@@ -9,7 +9,6 @@
     "dev": "umi dev"
   },
   "dependencies": {
-    "@ant-design/dark-theme": "^0.2.0",
     "antd": "^3.15.0",
     "classnames": "^2.2.6",
     "core-js": "^2.6.5",
@@ -30,6 +29,7 @@
     "react-fittext": "^1.0.0",
     "react-media-hook2": "^1.0.2",
     "umi": "^2.6.14",
+    "umi-plugin-antd-theme": "^1.0.1",
     "umi-plugin-react": "^1.7.2",
     "umi-request": "^1.0.5"
   },

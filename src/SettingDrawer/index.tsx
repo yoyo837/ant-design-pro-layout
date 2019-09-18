@@ -186,6 +186,41 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
     ];
   };
 
+  getThemeDom = () => {
+    const dom = document.getElementById('theme-style') as HTMLLinkElement;
+    if (dom) {
+      return dom;
+    }
+    const style = document.createElement('link');
+    style.type = 'text/css';
+    style.rel = 'stylesheet';
+    style.id = 'theme-style';
+    document.body.append(style);
+    return style;
+  };
+
+  onThemeChange = (theme?: 'dark' | 'light', key?: string) => {
+    if (!key && !theme) {
+      return;
+    }
+
+    const hide = message.loading('loading theme！');
+    const dom = this.getThemeDom();
+    dom.addEventListener(
+      'load',
+      () => {
+        hide();
+      },
+      false,
+    );
+    if (!key) {
+      // load dark default theme
+      dom.href = `/theme/${theme}.css`;
+    } else {
+      dom.href = `/theme/${theme === 'dark' ? `${theme}-` : ''}${key}.css`;
+    }
+  };
+
   changeSetting = (key: string, value: string | boolean) => {
     const { settings } = this.props;
     const nextState = { ...settings };
@@ -195,6 +230,7 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
     } else if (key === 'fixedHeader' && !value) {
       nextState.autoHideHeader = false;
     }
+
     this.setState(nextState, () => {
       const { onSettingChange } = this.props;
       if (onSettingChange) {
@@ -311,9 +347,25 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
                     'https://gw.alipayobjects.com/zos/antfincdn/NQ%24zoisaD2/jpRkZQMyYRryryPNtyIC.svg',
                   title: formatMessage({ id: 'app.setting.pagestyle.light' }),
                 },
+                {
+                  key: 'darkTheme',
+                  url:
+                    'https://gw.alipayobjects.com/zos/antfincdn/%245IcqjlpQS/black.svg',
+                  title: formatMessage({
+                    id: 'app.setting.pagestyle.darkTheme',
+                    defaultMessage: '',
+                  }),
+                },
               ]}
               value={navTheme}
-              onChange={value => this.changeSetting('navTheme', value)}
+              onChange={value => {
+                this.changeSetting('navTheme', value);
+                if (value === 'darkTheme') {
+                  this.onThemeChange('dark');
+                } else {
+                  this.onThemeChange('light', primaryColor);
+                }
+              }}
             />
           </Body>
 
@@ -321,7 +373,13 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
             title={formatMessage({ id: 'app.setting.themecolor' })}
             value={primaryColor}
             formatMessage={formatMessage}
-            onChange={color => this.changeSetting('primaryColor', color)}
+            onChange={(color, key) => {
+              this.changeSetting('primaryColor', color);
+              this.onThemeChange(
+                navTheme === 'darkTheme' ? 'dark' : 'light',
+                key as string,
+              );
+            }}
           />
 
           <Divider />

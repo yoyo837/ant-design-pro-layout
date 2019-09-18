@@ -33,7 +33,12 @@ const BlockCheckbox: React.FC<BlockCheckboxProps> = ({
               display: value === item.key ? 'block' : 'none',
             }}
           >
-            <Icon type="check" />
+            <Icon
+              type="check"
+              style={{
+                color: '#000',
+              }}
+            />
           </div>
         </div>
       </Tooltip>

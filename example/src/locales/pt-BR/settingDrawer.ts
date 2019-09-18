@@ -1,7 +1,8 @@
 export default {
   'app.setting.pagestyle': 'Configuração de estilo da página',
-  'app.setting.pagestyle.dark': 'Dark style',
-  'app.setting.pagestyle.light': 'Light style',
+  'app.setting.pagestyle.darkTheme': 'Dark Style',
+  'app.setting.pagestyle.dark': 'Dark Menu Style',
+  'app.setting.pagestyle.light': 'Light Menu Style',
   'app.setting.content-width': 'Largura do conteúdo',
   'app.setting.content-width.fixed': 'Fixo',
   'app.setting.content-width.fluid': 'Fluido',

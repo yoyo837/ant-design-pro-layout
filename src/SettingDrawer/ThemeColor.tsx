@@ -24,7 +24,7 @@ export interface ThemeColorProps {
   }[];
   title?: string;
   value: string;
-  onChange: (color: string) => void;
+  onChange: (color: string, key: string) => void;
   formatMessage: (data: { id: any; defaultMessage?: string }) => string;
 }
 
@@ -82,7 +82,7 @@ const ThemeColor: React.FC<ThemeColorProps> = ({
               className="theme-color-block"
               color={color}
               check={value === color}
-              onClick={() => onChange && onChange(color)}
+              onClick={() => onChange && onChange(color, key)}
             />
           </Tooltip>
         ))}

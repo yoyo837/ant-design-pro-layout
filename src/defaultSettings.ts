@@ -6,7 +6,7 @@ export interface Settings {
   /**
    * theme for nav menu
    */
-  navTheme: MenuTheme | undefined;
+  navTheme: MenuTheme | undefined | 'darkTheme';
   /**
    * nav menu position: `sidemenu` or `topmenu`
    */

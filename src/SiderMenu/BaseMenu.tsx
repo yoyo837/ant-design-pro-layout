@@ -20,7 +20,7 @@ import {
 
 export interface BaseMenuProps
   extends Partial<RouterTypes<Route>>,
-    Omit<MenuProps, 'openKeys'>,
+    Omit<MenuProps, 'openKeys' | 'theme'>,
     Partial<Settings> {
   className?: string;
   collapsed?: boolean;
@@ -33,7 +33,7 @@ export interface BaseMenuProps
   onOpenChange?: (openKeys: string[]) => void;
   openKeys?: WithFalse<string[]>;
   style?: React.CSSProperties;
-  theme?: MenuTheme;
+  theme?: MenuTheme | 'darkTheme';
   formatMessage?: (message: MessageDescriptor) => string;
   menuItemRender?: WithFalse<
     (
@@ -292,7 +292,7 @@ export default class BaseMenu extends Component<BaseMenuProps> {
           {...props}
           key="Menu"
           mode={mode}
-          theme={theme}
+          theme={theme === 'light' ? 'light' : 'dark'}
           onOpenChange={handleOpenChange}
           selectedKeys={selectedKeys}
           style={style}
