@@ -206,19 +206,13 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
 
     const hide = message.loading('loading theme！');
     const dom = this.getThemeDom();
-    dom.addEventListener(
-      'load',
-      () => {
-        hide();
-      },
-      false,
-    );
     if (!key) {
       // load dark default theme
       dom.href = `/theme/${theme}.css`;
     } else {
       dom.href = `/theme/${theme === 'dark' ? `${theme}-` : ''}${key}.css`;
     }
+    hide();
   };
 
   changeSetting = (key: string, value: string | boolean) => {
